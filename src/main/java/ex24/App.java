@@ -17,14 +17,14 @@ public class App {
         Scanner firstStringInput = new Scanner(System.in); //scan the first string
         String firstString = firstStringInput.next();
 
-        System.out.println("\nEnter the first string: "); //ask the user to input the second string
+        System.out.println("\nEnter the second string: "); //ask the user to input the second string
         Scanner secondStringInput = new Scanner(System.in); //scan the second string
         String secondString = secondStringInput.next();
 
-        if (isAnagram(firstString, secondString)) { //if the strings are anagrams
+        if (isAnagram(firstString, secondString) == true) { //if the strings are anagrams
             System.out.println("\n\"" + firstString + "\" " + "and \"" + secondString + "\" are anagrams."); //tell the user that the strings are anagrams
         }
-        else if (isAnagram(firstString, secondString)) { //if the strings aren't anagrams
+        else if (isAnagram(firstString, secondString) == false) { //if the strings aren't anagrams
             System.out.println("\n\"" + firstString + "\" " + "and \"" + secondString + "\" are not anagrams."); //tell the user that the strings aren't anagrams
         }
     }
@@ -43,13 +43,7 @@ public class App {
         Arrays.sort(firstStringArray); //sort the characters of the first string alphabetically
         Arrays.sort(secondStringArray); //sort the characters of the second string alphabetically
 
-        for (int i = 0; i < firstStringLength; i++) { //check each of the characters in the strings by array index to see if they match
-            if (firstStringArray[i] != secondStringArray[i]) { //if the characters in the same index of the strings don't match
-                return false; //the strings aren't anagrams
-            }
-        }
-
-        return true; //the strings are anagrams
+        return Arrays.equals(secondStringArray, firstStringArray); //if they match, the strings are anagrams
 
     }
 }

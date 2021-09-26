@@ -21,10 +21,10 @@ public class App {
         Scanner secondStringInput = new Scanner(System.in); //scan the second string
         String secondString = secondStringInput.next();
 
-        if (isAnagram(firstString, secondString) == true) { //if the strings are anagrams
+        if (isAnagram(firstString, secondString)) { //if the strings are anagrams
             System.out.println("\n\"" + firstString + "\" " + "and \"" + secondString + "\" are anagrams."); //tell the user that the strings are anagrams
         }
-        else if (isAnagram(firstString, secondString) == false) { //if the strings aren't anagrams
+        else if (!isAnagram(firstString, secondString)) { //if the strings aren't anagrams
             System.out.println("\n\"" + firstString + "\" " + "and \"" + secondString + "\" are not anagrams."); //tell the user that the strings aren't anagrams
         }
     }

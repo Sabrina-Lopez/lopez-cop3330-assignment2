@@ -49,7 +49,7 @@ public class App {
             }
         }
 
-        return true; //the strings are anagrams 
+        return true; //the strings are anagrams
 
     }
 }

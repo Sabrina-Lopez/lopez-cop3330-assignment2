@@ -5,59 +5,45 @@ package ex38;
  *  Copyright 2021 Sabrina Lopez
  */
 
-import java.util.Scanner;
+import java.util.*;
 
 public class App {
     public static void main( String[] args ) {
-       /* int numIndex = 1; //keep track of the index being filled into the integer array
 
         System.out.println("\nEnter a list of numbers, separated by spaces: "); //ask the user for a list of numbers
-        Scanner numListInput = new Scanner(System.in); //scan the list of numbers
-        String numList = numListInput.nextLine();
+        Scanner numberListInput = new Scanner(System.in); //scan the list of numbers
+        String numberList = numberListInput.nextLine();
 
-        //convert string into character array
-        int numListLength = numList.length();
-        int [] numListArray = new int[];
-        for (int i = 0; i < numListLength; i++) {
-            if(numList.charAt(i) != ' ') {
-                numListArray[] = numList.charAt(i);
-                numIndex++;
+        String[] numberListArray = numberList.split(" "); //create a string without the spaces
+
+        Integer[] evenNumberList = filterEvenNumbers(numberListArray); //filter out the even numbers from the string
+
+        System.out.print("The even numbers are "); //print out the list of even numbers filtered from the input
+        for(int i = 0; i < evenNumberList.length; i++) {
+            if (i < evenNumberList.length - 1) { //if the for loop has not reached the end of the even number list yet
+                System.out.print(evenNumberList[i] + " ");
+            }
+            else { //if the for loop has reached the end of the even number list
+                System.out.print(evenNumberList[i] + ".\n");
             }
         }
-
-        int [] evenNumList = filterEvenNumbers(numListArray);
-
-        System.out.print("\nThe even numbers are ");
-        for(int i = 0; i < evenNumList.length; i++){
-            if(i < evenNumList.length - 1){
-                System.out.print(evenNumList[i] + " ");
-            }
-            else
-            {
-                System.out.print(evenNumList[i] + ".");
-            }
-        }*/
 
     }
 
-    public static int[] filterEvenNumbers(int[] numListArray) {
-        //int nextEven = 0; //variable to keep track of index for the array with the even numbers
+    public static Integer[] filterEvenNumbers(String[] numberListArray) {
+        ArrayList<Integer> newEvenList = new ArrayList<>(); //initialization of new arraylist
 
-        int[] evenNumbers = new int[numListArray.length];
-
-        /*for(int i = 0; i < numListArray.length; i++) {
-            if(numListArray[i] % 2 == 0) {
-                evenNumbers[nextEven] = numListArray[i];
-                nextEven++;
+        for (String s : numberListArray) { //creating integers from the numbers in the string
+            int num = Integer.parseInt(s);
+            if (num % 2 == 0) { //adding only the even numbers into the new list
+                newEvenList.add(num);
             }
         }
 
-        for(int i = 0; i < nextEven + 1; i++) {
-            System.out.print(evenNumbers[i]);
-        }*/
+        Integer[] newNumberListArray = new Integer[newEvenList.size()]; //creating a new array to return to main
+        newNumberListArray = newEvenList.toArray(newNumberListArray); //converting the arraylist to an array
 
-        return evenNumbers;
-
+        return newNumberListArray; //return the new array with the list of even numbers
     }
 }
 

@@ -26,14 +26,18 @@ public class App {
         }
         double restingHR = restingHRInput.nextDouble();
 
+        //initial tablet format setup
         System.out.println("\nResting Pulse: " + String.format("%3.0f", restingHR) + "     Age: " + String.format("%3.0f", age));
         System.out.println("\nIntensity   | Rate");
         System.out.print("------------|---------\n");
 
+        double baseIntensity = 0.55;
+
+        //input of the intensities and the target heart rate calculations into the chart
         for(int i = 0; i < 9; i++) {
-            int intensity = (55 + (5 * i)) / 100;
-            double targetHeartRate = (((220 - age) - restingHR) * (double)(intensity)) + restingHR;
-            System.out.println(intensity + "%         | " + String.format("%4.0f", targetHeartRate) + " bpm");
+            double intensity = (baseIntensity + (0.05 * i)); //intensity calculation
+            double targetHeartRate = (((220 - age) - restingHR) * (intensity)) + restingHR; //target heart rate calculation
+            System.out.println(String.format("%2.0f", (intensity * 100)) + "%         | " + String.format("%4.0f", targetHeartRate) + " bpm");
         }
 
     }

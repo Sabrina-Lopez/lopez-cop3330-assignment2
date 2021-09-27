@@ -44,15 +44,16 @@ public class App {
             guessAnswer = guessAnswerInput.nextInt();
             numGuesses = numGuesses + 1; //guess counter increments with every guess the user makes
 
-            if (guessAnswer == correctAnswer) {
+            if (guessAnswer == correctAnswer) { //if the user got the correct answer first try
                 System.out.println("You got it in " + numGuesses + " guesses!");
             }
-            else {
-                while(guessAnswer != correctAnswer) {
+            else { //if they didn't
+                while(guessAnswer != correctAnswer) { //loop till the user finds the correct answer
 
-                    if(guessAnswer > correctAnswer) {
+                    if(guessAnswer > correctAnswer) { //if the user's answer is greater than the correct answer
                             System.out.println("Too high. Guess again: "); //ask for the user's next guess
 
+                            //determine new range by finding how to adjust the right and left values as well as the midpoint
                             if((midpoint < guessAnswer) && (midpoint < correctAnswer)) {
                                 rightValue = midpoint + 1;
                                 midpoint = (rightValue - leftValue) / 2;
@@ -62,9 +63,10 @@ public class App {
                                 midpoint = (rightValue - leftValue) / 2;
                             }
                     }
-                    else {
+                    else { //if the user's answer is less than the correct answer
                         System.out.println("Too low. Guess again: "); //ask for the user's next guess
 
+                        //determine new range by finding how to adjust the right and left values as well as the midpoint
                         if((midpoint > guessAnswer) && (midpoint < correctAnswer)) {
                             leftValue = midpoint + 1;
                             midpoint = (rightValue - leftValue) / 2;
@@ -75,7 +77,7 @@ public class App {
                         }
                     }
 
-                    numGuesses++;
+                    numGuesses++; //increment number of guesses
                     guessAnswerInput = new Scanner(System.in); //scan the user's next guess
                     guessAnswer = guessAnswerInput.nextInt();
 

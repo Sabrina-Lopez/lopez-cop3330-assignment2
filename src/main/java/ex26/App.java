@@ -11,9 +11,7 @@ class PaymentCalculator {
     public static double calculateMonthsUntilPaidOff(double balance, double dailyRate, double income) {
         double numMonths; //number of months to pay off card
         double constant = 1.0 / 30.0;
-
-        numMonths = -constant * (Math.log10(1 + (balance / income) * (1 - Math.pow(1 + dailyRate, 30))) / Math.log10(1 + dailyRate));
-
+        numMonths = -constant * (Math.log(1 + (balance / income) * (1 - Math.pow((1 + dailyRate), 30))) / Math.log(1 + dailyRate));
         return Math.ceil(numMonths);
     }
 }
@@ -30,7 +28,7 @@ public class App {
         Scanner aprInput = new Scanner(System.in); //scan their APR
         double apr = aprInput.nextDouble();
 
-        double dailyRate = apr / 365;
+        double dailyRate = (apr / 100) / 365;
 
         System.out.println("\nWhat is the monthly payment you can make? "); //ask the user's income
         Scanner incomeInput = new Scanner(System.in); //scan their income
@@ -41,7 +39,7 @@ public class App {
 
         //tell the user the number of months it will take to pay of their card
         //numMonths rounded up to the next integer value
-        System.out.println("\nIt will take you " + numMonths + " months to pay off this card.");
+        System.out.println("\nIt will take you " + (int)numMonths + " months to pay off this card.");
     }
 }
 

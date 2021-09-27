@@ -5,25 +5,33 @@ package ex29;
  *  Copyright 2021 first_name last_name
  */
 
-import java.util.Scanner;
+import java.util.*;
+import java.util.regex.*;
 
 public class App {
     public static void main( String[] args ) {
-        int returnRate;
+        String returnRate;
+        int returnRateInt = 0;
+        boolean isValidInput = false;
 
-        System.out.println("\nWhat is the rate of return? "); //ask the user for the rate of return
-        Scanner returnRateInput = new Scanner(System.in); //scan the rate of return
+        while (!isValidInput)
+        {
+            System.out.println("\nWhat is your rate of return? ");
+            Scanner returnRateInput = new Scanner(System.in); //scan the rate of return
+            returnRate = returnRateInput.nextLine();
 
-        while((!returnRateInput.hasNextInt()) || (returnRateInput.nextInt() == 0)) {
-            System.out.println("\nSorry. That's not a valid input. "); //inform the user that their input was invalid
-            System.out.println("\nWhat is the rate of return? ");
-            returnRateInput = new Scanner(System.in);
+            if (Pattern.matches("[0-9]+", returnRate) && Integer.parseInt(returnRate) != 0)
+            {
+                isValidInput = true;
+                returnRateInt = Integer.parseInt(returnRate);
+            }
+            else
+            {
+                System.out.println("\nSorry. That's not a valid input.");
+            }
         }
 
-        returnRate = returnRateInput.nextInt();
-
-
-        int years = 72 / returnRate; //calculate the amount of years it will take to double the investment
+        int years = 72 / returnRateInt; //calculate the amount of years it will take to double the investment
 
         //tell the user the amount of years it will take to double the investment
         System.out.println("\nIt will take " + years + " years to double your initial investment.");

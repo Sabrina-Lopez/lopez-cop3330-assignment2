@@ -10,8 +10,7 @@ import java.util.*;
 public class App {
     public static void main( String[] args ) {
         String currentName = "0";
-        String[] namesArray = new String[15];
-        List<String> namesArrayList = Arrays.asList(namesArray);
+        ArrayList<String> namesArrayList = new ArrayList<>(15);
         int numNames = 0;
         int winner;
 
@@ -20,11 +19,8 @@ public class App {
             Scanner currentNameInput = new Scanner(System.in); //scan the name
             currentName = currentNameInput.nextLine();
             if(!(currentName.equals(""))) {
-                namesArrayList.set(numNames, currentName);
+                namesArrayList.add(currentName);
                 numNames++;
-                if((numNames + 1) >= 15) {
-                    namesArrayList.add(String.valueOf(5));
-                }
             }
         }
 

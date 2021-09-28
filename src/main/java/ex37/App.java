@@ -33,47 +33,47 @@ public class App {
             generatedPasswordLength = passwordMinLength;
         }
 
-        List<char[]> finalPassword; //initialized character arraylist
-        finalPassword = generatePassword(generatedPasswordLength, numSpecialCharacters, numNumbers);
+        String finalGeneratedPassword; //initialized character arraylist
+        finalGeneratedPassword = generatePassword(generatedPasswordLength, numSpecialCharacters, numNumbers);
 
         //tell the user what their generated password is
-        System.out.print("\nYour password is " );
-        for(int i = 0; i < generatedPasswordLength; i++) {
-            System.out.print(finalPassword.get(i));
-        }
+        System.out.print("\nYour password is " + finalGeneratedPassword);
 
     }
 
-    public static List<char[]> generatePassword(int generatedPasswordLength, int numSpecialCharacters, int numNumbers) {
+    public static String generatePassword(int generatedPasswordLength, int numSpecialCharacters, int numNumbers) {
         String letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; //all possible letters
         String specialCharacters = "!@#$%&*()'+,-./:;<=>?[]^_`{|}~"; //all possible special characters
         String numbers = "1234567890"; //all possible numbers
 
-        Random random = new Random();
+        Random random = new Random(); //initialize randomization
 
         //declare array list to hold the password characters
-        char[] generatedPassword = new char[generatedPasswordLength];
+        ArrayList<Character> generatedPassword = new ArrayList<>();
 
         //input random special characters into the password
         for(int i = 0; i < numSpecialCharacters; i++){
-            generatedPassword[i] = specialCharacters.charAt(random.nextInt(specialCharacters.length()));
+            generatedPassword.add(specialCharacters.charAt(random.nextInt(specialCharacters.length())));
         }
 
         //input random numbers into the password
-        for(int i = (numSpecialCharacters); i < (numNumbers + numSpecialCharacters + 1); i++){
-            generatedPassword[i] = numbers.charAt(random.nextInt(numbers.length()));
+        for(int i = (numSpecialCharacters); i < (numNumbers + numSpecialCharacters); i++){
+            generatedPassword.add(numbers.charAt(random.nextInt(numbers.length())));
         }
 
         //input random letters into the password
         for(int i = (numNumbers + numSpecialCharacters); i < generatedPasswordLength; i++){
-            generatedPassword[i] = letters.charAt(random.nextInt(letters.length()));
+            generatedPassword.add(letters.charAt(random.nextInt(letters.length())));
         }
 
-        List<char[]> finalGeneratedPasswordList = new ArrayList<>();
-        Collections.addAll(finalGeneratedPasswordList, generatedPassword);
-        Collections.shuffle(finalGeneratedPasswordList);
+        Collections.shuffle(generatedPassword); //randomize the characters of the password
 
-        //return the final generated password for the user
-        return finalGeneratedPasswordList;
+        StringBuilder finalGeneratedPassword = new StringBuilder();
+
+        for(Character passwordCharacters : generatedPassword) { // loop to concatenate all list characters of the password
+            finalGeneratedPassword.append(passwordCharacters);
+        }
+
+        return finalGeneratedPassword.toString(); //return the final generated password for the user
     }
 }

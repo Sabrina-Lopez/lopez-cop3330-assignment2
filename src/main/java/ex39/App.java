@@ -6,92 +6,75 @@ package ex39;
  */
 
 import java.util.*;
-import java.util.function.Function;
 
 public class App {
     public static void main(String[] args) {
 
-        //map of the employees and their company information (e.g., first name, last name, department, separation date (if they did))
-        companyEmployees [] employeesInfo = {
-                new companyEmployees ("John","Johnson","Manager","2016-12-31"),
-                new companyEmployees ("Tou","Xiong","Software Engineer","2016-10-05"),
-                new companyEmployees ("Michaela", "Michaelson", "District Manager", "2015-12-19"),
-                new companyEmployees ("Jake","Jacobson","Programmer"," "),
-                new companyEmployees ("Jacquelyn", "Jackson", "DBA"," "),
-                new companyEmployees ("Sally","Webber","Web Developer","2015-12-18")
-        };
+        //list of the employees and their information (e.g., first name, last name, department, separation date)
 
-        List<companyEmployees> employeesList = Arrays.asList(employeesInfo); //create view of list of employees
+        List<HashMap<String,String>> employees = new ArrayList<>(); //create hash map for all employees
 
-        //get the first and last names from each employee
-        Function<companyEmployees, String> byFirstName = companyEmployees::getFirstName;
-        Function<companyEmployees, String> byLastName = companyEmployees::getLastName;
+        HashMap<String, String> jacquelynJackson = new HashMap<>(); //create hashmap for jacquelyn jackson
 
-        //compare the employees by first name and then last name
-        Comparator<companyEmployees> lastThenFirst = Comparator.comparing(byLastName).thenComparing(byFirstName);
+        jacquelynJackson.put("First Name", "Jacquelyn"); //her first name
+        jacquelynJackson.put("Last Name", "Jackson"); //last name
+        jacquelynJackson.put("Position Name", "DBA"); //department
+        jacquelynJackson.put("Separation Date", ""); //separation date
 
-        //create table as well as sort and display the employees in alphabetical order based on their last names
-        System.out.println("\nName     ----->     Department     ----->     Separation Date");
-        System.out.println("-------------------------------------------------------------------------------");
-        employeesList.stream()
-                .sorted(lastThenFirst)
-                .forEach(System.out::println);
+        employees.add(jacquelynJackson); //add her to the employees hashmap
+
+        HashMap<String, String> jakeJacobson = new HashMap<>(); //create hashmap for jake jacobson
+
+        jakeJacobson.put("First Name", "Jake"); //their first name
+        jakeJacobson.put("Last Name", "Jacobson"); //last name
+        jakeJacobson.put("Position Name", "Programmer"); //department
+        jakeJacobson.put("Separation Date", ""); //separation date
+
+        employees.add(jakeJacobson); //add them to the employees hashmap
+
+        HashMap<String, String> johnJohnson = new HashMap<>(); //create hashmap for john johnson
+
+        johnJohnson.put("First Name", "John"); //his first name
+        johnJohnson.put("Last Name", "Johnson"); //last name
+        johnJohnson.put("Position Name", "Manager"); //department
+        johnJohnson.put("Separation Date", "2016-12-31"); //separation date
+
+        employees.add(johnJohnson); //add him to the employees hashmap
+
+        HashMap<String, String> michaelaMichaelson = new HashMap<>(); //create hashmap for michaela michaelson
+
+        michaelaMichaelson.put("First Name", "Michaela"); //their first name
+        michaelaMichaelson.put("Last Name", "Michaelson"); //last name
+        michaelaMichaelson.put("Position Name", "District Manager"); //department
+        michaelaMichaelson.put("Separation Date", "2015-12-19"); //separation date
+
+        employees.add(michaelaMichaelson); //add them to the employees hashmap
+
+        HashMap<String, String> sallyWebber = new HashMap<>(); //create hashmap for sally webber
+
+        sallyWebber.put("First Name", "Sally"); //her first name
+        sallyWebber.put("Last Name", "Webber"); //last name
+        sallyWebber.put("Position Name", "Web Developer"); //department
+        sallyWebber.put("Separation Date", "2015-12-18"); //separation date
+
+        employees.add(sallyWebber); //add her to the employees hashmap
+
+        HashMap<String, String> touXiong = new HashMap<>(); //create hashmap for tou xiong
+
+        touXiong.put("First Name", "Tou"); //her first name
+        touXiong.put("Last Name", "Xiong"); //last name
+        touXiong.put("Position Name", "Software Engineer"); //department
+        touXiong.put("Separation Date", "2016-10-05"); //separation date
+
+        employees.add(touXiong); //add her to the employees hashmap
+
+        //print out the list of the employees and their info
+        System.out.println("\nName                | Position          | Separation Date");
+        System.out.println("--------------------|-------------------|----------------");
+        for (HashMap<String, String> currentEmployee : employees) {
+            String employeeName = currentEmployee.get("First Name") + " " + currentEmployee.get("Last Name");
+            System.out.printf("%-20s| %-18s| %-20s%n", employeeName, currentEmployee.get("Position Name"), currentEmployee.get("Separation Date"));
+        }
+
     }
-}
-
-//creation of class to hold employees' information
-class companyEmployees {
-    private String firstName; //private declarations for the employee's information
-    private String lastName;
-    private String department;
-    private String separationDate;
-
-    public companyEmployees(String firstName, String lastName, String department, String separationDate) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-
-        this.department = department;
-        this.separationDate = separationDate;
-    }
-
-    public void setFirstName (String firstName) { //set the first name of the employee
-        this.firstName = firstName;
-    }
-
-    public String getFirstName() { //get the first name of the employee
-        return firstName;
-    }
-
-    public void setLastName (String lastName) { //set the last name of the employee
-        this.lastName = lastName;
-    }
-
-    public String getLastName() { //get the last name of the employee
-        return lastName;
-    }
-
-    public void setDepartment (String department) { //set the department of the employee
-        this.department = department;
-    }
-
-    public String getDepartment() { //get the department of the employee
-        return department;
-    }
-
-    public void setSeparationDate (String separationDate) { //set the separation date of the employee
-        this.separationDate = separationDate;
-    }
-
-    public String getSeparationDate() { //get the separation date of the employee
-        return separationDate;
-    }
-
-    public String getName() { //get the full name of the employee, so first and last name
-        return getFirstName() + " " + getLastName();
-    }
-
-    public String toString() { //print out the employees in sorted alphabetical order based on their last names
-        return String.format("%s %-5s     ----->     %-5s     ----->     %-5s", getFirstName(), getLastName(), getDepartment(),getSeparationDate());
-    }
-
 }
